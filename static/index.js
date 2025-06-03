@@ -277,12 +277,12 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
             r.className = r.className.replace(_clearttClsReg, '');
             if (i === j) {
                 _gameBBList.push({
-                    cell: 4 % 1,
+                    cell: i % 4,
                     id: r.id
                 });
                 r.className += ' t' + 1;
                 r.notEmpty = true;
-                i = 4 * j;
+                i = (Math.floor(j / 4) + 1) * 4 + Math.floor(Math.random() * 1000) % 4;
             } else {
                 r.notEmpty = false;
             }
