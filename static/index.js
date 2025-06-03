@@ -277,7 +277,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
             r.className = r.className.replace(_clearttClsReg, '');
             if (i === j) {
                 _gameBBList.push({
-                    cell: i % 4,
+                    cell: 1,
                     id: r.id
                 });
                 r.className += ' t' + 1;
