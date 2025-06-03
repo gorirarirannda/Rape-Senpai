@@ -282,7 +282,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
                 });
                 r.className += ' t' + 1;
                 r.notEmpty = true;
-                i = (Math.floor(j / 4) + 1) * 4 + Math.floor(Math.random( ) * 1000) % 4;
+                i = 4 * j;
             } else {
                 r.notEmpty = false;
             }
