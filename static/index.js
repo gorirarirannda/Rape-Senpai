@@ -303,9 +303,9 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         }
         box.style[transitionDuration] = '150ms';
     }*/
-   
+
 //ここから↓
-    const FIXED_COLUMN =1;
+    const FIXED_COLUMN =1;  //0:1番列,1:2番列,2:3番列,3:4番列
    function refreshGameLayer(box, loop, offset) {
         let i = FIXED_COLUMN;
         for (let j = 0; j < box.children.length; j++) {
