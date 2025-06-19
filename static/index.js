@@ -266,7 +266,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
     let _ttreg = / t{1,2}(\d+)/,
         _clearttClsReg = / t{1,2}\d+| bad/;
 
-    function refreshGameLayer(box, loop, offset) {
+    /*function refreshGameLayer(box, loop, offset) {
         let i = Math.floor(Math.random() * 1000) % 4 + (loop ? 0 : 4);
         for (let j = 0; j < box.children.length; j++) {
             let r = box.children[j], rstyle = r.style;
@@ -302,8 +302,47 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
             box.style[transform] = 'translate3D(0,' + box.y + 'px,0)';
         }
         box.style[transitionDuration] = '150ms';
+    }*/
+   
+//ここから↓
+    const FIXED_COLUMN =1;
+   function refreshGameLayer(box, loop, offset) {
+        let i = FIXED_COLUMN;
+        for (let j = 0; j < box.children.length; j++) {
+            let r = box.children[j], rstyle = r.style;
+            rstyle.left = (j % 4) * blockSize + 'px';
+            rstyle.bottom = Math.floor(j / 4) * blockSize + 'px';
+            rstyle.width = blockSize + 'px';
+            rstyle.height = blockSize + 'px';
+            r.className = r.className.replace(_clearttClsReg, '');
+            if ((j%4) === i) {
+                _gameBBList.push({
+                    cell: i,
+                    id: r.id
+                });
+                r.className += ' t' + (Math.floor(Math.random() * 1000) % 5 + 1);
+                r.notEmpty = true;
+            } else {
+                r.notEmpty = false;
+            }
+        }
+        if (loop) {
+            box.style.webkitTransitionDuration = '0ms';
+            box.style.display = 'none';
+            box.y = -blockSize * (Math.floor(box.children.length / 4) + (offset || 0)) * loop;
+            setTimeout(function () {
+                box.style[transform] = 'translate3D(0,' + box.y + 'px,0)';
+                setTimeout(function () {
+                    box.style.display = 'block';
+                }, 100);
+            }, 200);
+        } else {
+            box.y = 0;
+            box.style[transform] = 'translate3D(0,' + box.y + 'px,0)';
+        }
+        box.style[transitionDuration] = '150ms';
     }
-
+//ここまでで2番列に固定
     function gameLayerMoveNextRow() {
         for (let i = 0; i < GameLayer.length; i++) {
             let g = GameLayer[i];
